@@ -33,9 +33,9 @@ public class MortgageCalculatorPage {
             yearsInputField.sendKeys(Keys.BACK_SPACE);
             yearsInputField.sendKeys(Keys.BACK_SPACE);
             yearsInputField.setValue(String.valueOf(i)).pressEnter();
-            Selenide.sleep(3000);
+            Selenide.sleep(1000);
             int currentSum = Integer.parseInt(currentPayment.getText().replaceAll("[^0-9]", ""));
-            if (previousSum < currentSum && i != 3) {
+            if (previousSum < currentSum && i != min) {
                 return false;
             }
             previousSum = currentSum;
