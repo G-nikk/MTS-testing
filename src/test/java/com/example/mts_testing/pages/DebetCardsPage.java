@@ -16,12 +16,9 @@ public class DebetCardsPage {
 
     public DebetCardsPage(String url){
         Selenide.open(url);
-    }
-
-    public DebetCardsPage goToDebetCardsPage(){
+        Selenide.sleep(1000);
         cardsButton.click();
         debetCardsButton.click();
-        return this;
     }
 
     public boolean fillData(String phoneNumber, String name, String email){

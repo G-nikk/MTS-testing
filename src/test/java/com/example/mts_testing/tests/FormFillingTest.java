@@ -13,7 +13,6 @@ public class FormFillingTest extends BaseTest {
     @Test
     public void testFormFilling() {
         DebetCardsPage page = new DebetCardsPage(BASE_URL);
-        page.goToDebetCardsPage();
         boolean result = page.fillData(phoneNumber, name, email);
         Assertions.assertTrue(result);
     }

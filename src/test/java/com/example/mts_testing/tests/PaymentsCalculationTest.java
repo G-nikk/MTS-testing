@@ -10,9 +10,14 @@ public class PaymentsCalculationTest extends BaseTest {
     @Test
     public void testPaymentsCalculation() {
         MortgageCalculatorPage mortgageCalculatorPage = new MortgageCalculatorPage(BASE_URL);
-        boolean result = mortgageCalculatorPage
-                .goToMortgageCalculatorPage()
-                .fillDataAndComparePayments();
+        boolean result = mortgageCalculatorPage.fillDataAndComparePayments();
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    public void testPaymentsCalculationWithWrongData() {
+        MortgageCalculatorPage mortgageCalculatorPage = new MortgageCalculatorPage(BASE_URL);
+        boolean result = mortgageCalculatorPage.fillWrongData();
         Assertions.assertTrue(result);
     }
 }

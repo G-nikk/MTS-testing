@@ -16,12 +16,9 @@ public class MortgageCalculatorPage {
 
     public MortgageCalculatorPage(String url){
         Selenide.open(url);
-    }
-
-    public MortgageCalculatorPage goToMortgageCalculatorPage(){
+        Selenide.sleep(1000);
         mortgageButton.click();
         calculatorButton.click();
-        return this;
     }
 
     public boolean fillDataAndComparePayments() {
@@ -39,6 +36,24 @@ public class MortgageCalculatorPage {
                 return false;
             }
             previousSum = currentSum;
+        }
+        return true;
+    }
+
+    public boolean fillWrongData() {
+        int min = Integer.parseInt(minYears.getText().replaceAll("[^0-9]", ""));
+        int max = Integer.parseInt(maxYears.getText().replaceAll("[^0-9]", ""));
+        return fillYearsInputFieldAndCheckCurrentPayment(min - 1) && fillYearsInputFieldAndCheckCurrentPayment(max + 1);
+    }
+
+    public boolean fillYearsInputFieldAndCheckCurrentPayment(int years) {
+        yearsInputField.click();
+        yearsInputField.sendKeys(Keys.BACK_SPACE);
+        yearsInputField.sendKeys(Keys.BACK_SPACE);
+        yearsInputField.setValue(String.valueOf(years)).pressEnter();
+        Selenide.sleep(1000);
+        if (!(currentPayment.getText().equals("") || currentPayment.getText().equals(""))) {
+            return false;
         }
         return true;
     }
