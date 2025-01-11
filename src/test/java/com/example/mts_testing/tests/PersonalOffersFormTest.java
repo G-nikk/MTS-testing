@@ -5,8 +5,6 @@ import com.example.mts_testing.pages.MainPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Random;
-
 public class PersonalOffersFormTest extends BaseTest {
     private final static String BASE_URL = "https://www.mtsbank.ru";
 

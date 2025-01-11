@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
 public class PaymentsCalculationTest extends BaseTest {
-    private final static String BASE_URL = "https://www.mtsbank.ru";
+    private final static String BASE_URL = "https://www.mtsbank.ru/chastnim-licam/ipoteka/";
 
     @Test
     public void testPaymentsCalculation() {

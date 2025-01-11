@@ -8,25 +8,19 @@ import org.openqa.selenium.Keys;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class MortgageCalculatorPage {
-    private final SelenideElement mortgageButton = $x("//a[@href='/chastnim-licam/ipoteka/' and @class='LinkWrapper-sc-f1cacf38-0 jeazkY sc-5055b9e7-5 fYIeVB']");
     private final SelenideElement calculatorButton = $x("//div[text()='Калькулятор']");
     private final SelenideElement yearsInputField = $x("//div[@label='Срок кредита']/child::input");
     private final SelenideElement currentPayment = $x("//div[text()='Ежемес. платеж']/following-sibling::h4[@class='Wrapper-sc-6nwvzq-0 ckobOi']");
-    private final SelenideElement currentPaymentMobile = $x("//div[text()='Платеж']/following-sibling::div");
+    private final SelenideElement currentPaymentMobile = $x("//div[text()='Платеж']/following-sibling::div[@class='Wrapper-sc-1vydk7-0 fWmnTq']");
     private final SelenideElement minYears = $x("//div[text()='от 3 лет']");
     private final SelenideElement maxYears = $x("//div[text()='до 30 лет']");
-    private final SelenideElement areaToHover = $x("//div[@class='LinksWrapper-eerdxp-0 icydKH']");
     private final SelenideElement firstPayment = $x("//div[text()='Первоначальный взнос']");
 
     public MortgageCalculatorPage(String url, boolean mobileVersion){
         if (mobileVersion){
-            Configuration.browserSize = "390x844";
+            System.setProperty("chromeoptions.mobileEmulation", "deviceName=Nexus 5");
         }
-        else Configuration.browserSize = "1143x739";
         Selenide.open(url);
-        Selenide.sleep(1000);
-        mortgageButton.click();
-        if (areaToHover.isDisplayed()) areaToHover.hover();
         calculatorButton.click();
         firstPayment.scrollIntoView(true);
     }
@@ -74,7 +68,8 @@ public class MortgageCalculatorPage {
         yearsInputField.sendKeys(Keys.BACK_SPACE);
         yearsInputField.setValue(String.valueOf(years)).pressEnter();
         Selenide.sleep(1000);
-        if (!(currentPayment.getText().equals("") || currentPayment.getText().equals(""))) {
+        if ((currentPayment.isDisplayed() && !(currentPayment.getText().equals("") || currentPayment.getText().equals(""))) ||
+                (currentPaymentMobile.isDisplayed() && !(currentPaymentMobile.getText().equals("") || currentPaymentMobile.getText().equals("")))) {
             return false;
         }
         return true;

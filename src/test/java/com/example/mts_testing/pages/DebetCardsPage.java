@@ -6,26 +6,32 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-public class DebetCardsPage {
-    private final SelenideElement cardsButton = $x("//a[@href='/chastnim-licam/karti/' and @class='LinkWrapper-sc-f1cacf38-0 jeazkY sc-5055b9e7-5 fYIeVB']");
-    private final SelenideElement debetCardsButton = $x("//a[@href='/chastnim-licam/karti/all/debet/' and @class='TabItem-sc-a22f654e-4 cSHyEg']");
-    private final SelenideElement currentFill = $x("//div[@class='Title-sc-290e3282-1 cgDJFY']");
-    private final SelenideElement expectedFill = $x("//div[@class='Wrapper-sc-6189bc63-0 qLEoo']");
-    private final SelenideElement phoneNumberInput = $x("//input[@type='tel']");
-    private final SelenideElement nameInput = $x("//textarea[@name='clientFio']");
-    private final SelenideElement emailInput = $x("//input[@type='email']");
-    private final SelenideElement areaToHover = $x("//div[@class='LinksWrapper-sc-8f85e40f-0 hONFWM']");
+/**
+Класс страницы https://www.mtsbank.ru/chastnim-licam/karti/all/debet/
+ */
 
+public class DebetCardsPage {
+
+    /** Кнопка "Карты" на главной странице сайта https://www.mtsbank.ru */
+    private final SelenideElement cardsButton = $x("//a[@href='/chastnim-licam/karti/' and @class='LinkWrapper-sc-f1cacf38-0 jeazkY sc-5055b9e7-5 fYIeVB']");
+    /** Кнопка "Дебетовые" на странице https://www.mtsbank.ru/chastnim-licam/karti/ */
+    private final SelenideElement debetCardsButton = $x("//a[@href='/chastnim-licam/karti/all/debet/' and @class='TabItem-sc-a22f654e-4 cSHyEg']");
+    /** Текущий процент заполненности формы на странице https://www.mtsbank.ru/chastnim-licam/karti/all/debet/ */
+    private final SelenideElement currentFill = $x("//div[@class='Title-sc-290e3282-1 cgDJFY']");
+    /** Ожидаемый процент заполненности формы на странице https://www.mtsbank.ru/chastnim-licam/karti/all/debet/ */
+    private final SelenideElement expectedFill = $x("//div[@class='Wrapper-sc-6189bc63-0 qLEoo']");
+    /** Поле ввода номера телефона в форме на странице https://www.mtsbank.ru/chastnim-licam/karti/all/debet/ */
+    private final SelenideElement phoneNumberInput = $x("//input[@type='tel']");
+    /** Поле ввода ФИО в форме на странице https://www.mtsbank.ru/chastnim-licam/karti/all/debet/ */
+    private final SelenideElement nameInput = $x("//textarea[@name='clientFio']");
+    /** Поле ввода почты в форме на странице https://www.mtsbank.ru/chastnim-licam/karti/all/debet/ */
+    private final SelenideElement emailInput = $x("//input[@type='email']");
+   /** Конструктор, который устанавливает  */
     public DebetCardsPage(String url, boolean mobileVersion){
         if (mobileVersion){
-            Configuration.browserSize = "390x844";
+            System.setProperty("chromeoptions.mobileEmulation", "deviceName=Nexus 5");
         }
-        else Configuration.browserSize = "1143x739";
         Selenide.open(url);
-        Selenide.sleep(1000);
-        cardsButton.click();
-        if (!mobileVersion) areaToHover.hover();
-        debetCardsButton.click();
     }
 
     public boolean fillData(String phoneNumber, String name, String email){
