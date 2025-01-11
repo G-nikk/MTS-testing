@@ -12,9 +12,15 @@ public class FormFillingTest extends BaseTest {
 
     @Test
     public void testFormFilling() {
-        DebetCardsPage page = new DebetCardsPage(BASE_URL);
+        DebetCardsPage page = new DebetCardsPage(BASE_URL, false);
         boolean result = page.fillData(phoneNumber, name, email);
         Assertions.assertTrue(result);
     }
 
+    @Test
+    public void testFormFillingForMobileVersion() {
+        DebetCardsPage page = new DebetCardsPage(BASE_URL, true);
+        boolean result = page.fillData(phoneNumber, name, email);
+        Assertions.assertTrue(result);
+    }
 }

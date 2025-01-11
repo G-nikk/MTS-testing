@@ -1,5 +1,6 @@
 package com.example.mts_testing.pages;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.Keys;
@@ -13,11 +14,17 @@ public class MortgageCalculatorPage {
     private final SelenideElement currentPayment = $x("//div[text()='Ежемес. платеж']/following-sibling::h4[@class='Wrapper-sc-6nwvzq-0 ckobOi']");
     private final SelenideElement minYears = $x("//div[text()='от 3 лет']");
     private final SelenideElement maxYears = $x("//div[text()='до 30 лет']");
+    private final SelenideElement areaToHover = $x("//div[@class='LinksWrapper-sc-8f85e40f-0 hONFWM']");
 
-    public MortgageCalculatorPage(String url){
+    public MortgageCalculatorPage(String url, boolean mobileVersion){
+        if (mobileVersion){
+            Configuration.browserSize = "390x844";
+        }
+        else Configuration.browserSize = "1143x739";
         Selenide.open(url);
         Selenide.sleep(1000);
         mortgageButton.click();
+        if (!mobileVersion) areaToHover.hover();
         calculatorButton.click();
     }
 

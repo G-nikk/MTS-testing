@@ -1,5 +1,6 @@
 package com.example.mts_testing.pages;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
@@ -13,11 +14,17 @@ public class DebetCardsPage {
     private final SelenideElement phoneNumberInput = $x("//input[@type='tel']");
     private final SelenideElement nameInput = $x("//textarea[@name='clientFio']");
     private final SelenideElement emailInput = $x("//input[@type='email']");
+    private final SelenideElement areaToHover = $x("//div[@class='LinksWrapper-sc-8f85e40f-0 hONFWM']");
 
-    public DebetCardsPage(String url){
+    public DebetCardsPage(String url, boolean mobileVersion){
+        if (mobileVersion){
+            Configuration.browserSize = "390x844";
+        }
+        else Configuration.browserSize = "1143x739";
         Selenide.open(url);
         Selenide.sleep(1000);
         cardsButton.click();
+        if (!mobileVersion) areaToHover.hover();
         debetCardsButton.click();
     }
 
