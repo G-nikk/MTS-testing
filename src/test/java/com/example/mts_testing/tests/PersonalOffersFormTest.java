@@ -5,9 +5,10 @@ import com.example.mts_testing.pages.MainPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 public class PersonalOffersFormTest extends BaseTest {
     private final static String BASE_URL = "https://www.mtsbank.ru";
-    private final static String phoneNumber = "9000000004";
 
     @Test
     public void testIfSubmitButtonIsVisibleNotFillingPhoneNumber() {
@@ -21,7 +22,7 @@ public class PersonalOffersFormTest extends BaseTest {
     @Test
     public void testIfSubmitButtonIsVisibleFillingPhoneNumber() {
         MainPage mainPage = new MainPage(BASE_URL, false);
-        mainPage.enterPhoneNumber(phoneNumber);
+        mainPage.enterPhoneNumber(generateRandomTenDigitNumberAsString());
         mainPage.clickFindOutButton();
         Selenide.sleep(5000);
         boolean result = mainPage.searchSubmitButton();
@@ -40,11 +41,16 @@ public class PersonalOffersFormTest extends BaseTest {
     @Test
     public void testIfSubmitButtonIsVisibleFillingPhoneNumberForMobileVersion() {
         MainPage mainPage = new MainPage(BASE_URL, true);
-        mainPage.enterPhoneNumber(phoneNumber);
+        mainPage.enterPhoneNumber(generateRandomTenDigitNumberAsString());
         mainPage.clickFindOutButton();
         Selenide.sleep(5000);
         boolean result = mainPage.searchSubmitButton();
         Assertions.assertTrue(result);
     }
 
+    public static String generateRandomTenDigitNumberAsString() {
+        double randomNumber = Math.random();
+        long number = (long) (randomNumber * 10_000_000_000L);
+        return String.format("%010d", number);
+    }
 }

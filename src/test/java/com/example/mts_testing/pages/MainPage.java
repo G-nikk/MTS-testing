@@ -17,7 +17,7 @@ public class MainPage {
             System.setProperty("chromeoptions.mobileEmulation", "deviceName=Nexus 5");
         }
         Selenide.open(url);
-        Selenide.sleep(1000000000);
+        Selenide.sleep(1000);
         if (closeBannerButton.isDisplayed()){
             closeBannerButton.click();
         }
