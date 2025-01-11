@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class FormFillingTest extends BaseTest {
     private final static String BASE_URL = "https://www.mtsbank.ru";
-    private final static String phoneNumber = "9013870551";
+    private final static String phoneNumber = "9013870552";
     private final static String name = "Иванов Иван Иванович";
     private final static String email = "test@mail.ru";
 
