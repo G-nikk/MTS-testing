@@ -66,7 +66,7 @@ public class MortgageCalculatorPage {
             yearsInputField.sendKeys(Keys.BACK_SPACE);
             yearsInputField.setValue(String.valueOf(i)).pressEnter();
 
-            Selenide.sleep(1000);
+            Selenide.sleep(100);
 
             int currentSum;
 
@@ -102,7 +102,7 @@ public class MortgageCalculatorPage {
         yearsInputField.sendKeys(Keys.BACK_SPACE);
         yearsInputField.setValue(String.valueOf(years)).pressEnter();
 
-        Selenide.sleep(1000);
+        Selenide.sleep(100);
 
         if ((currentPayment.isDisplayed() && !(currentPayment.getText().equals("") || currentPayment.getText().equals(""))) ||
                 (currentPaymentMobile.isDisplayed() && !(currentPaymentMobile.getText().equals("") || currentPaymentMobile.getText().equals("")))) {
